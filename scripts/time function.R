@@ -1,10 +1,13 @@
-# test the timing of the three algorithm
-############################################################################
+##########################################
+# test the timing of the three algorithm #
+##########################################
 ##############
 # normfinder #
 ##############
+# define the dataset
 df <- read.csv("testHK.csv")
 df_data <- df[-15,]
+# run the test increasing the size of the dataframe
 time <- lapply(1:20,function(x){
   big_df<-{}
   big_df_2<-{}
@@ -26,6 +29,7 @@ time <- lapply(1:20,function(x){
   norm2 <- Normfinder("big_df.csv",ctVal = FALSE)
   return(Sys.time()-t)
 })
+
 # extract the time
 library(stringr)
 tim<-as.numeric(lapply(time,function(x){
@@ -38,12 +42,13 @@ plot_normfinder <- ggplot(data.frame(second=tim,genes=dim),aes(x=genes,y=second)
   geom_point()+
   ggtitle("normfinder efficiency")
 ############################################################################
-
-####
-####
-####
+##########
+# genorm #
+##########
+# define the dataset
 df <- read.csv("testHK.csv")
 df_data <- df[-15,]
+# run the test increasing the size of the dataframe
 time <- lapply(1:20,function(x){
   big_df<-{}
   big_df_2<-{}
@@ -84,7 +89,10 @@ plot_genorm <- ggplot(data.frame(second=tim,genes=dim),aes(x=genes,y=second))+
   geom_point()+
   ggtitle("genorm efficiency")
 ############################################################################
-
+###########
+# p_value #
+###########
+# define the dataset
 df <- read.csv("testHK.csv")
 df_data <- df[-15,]
 time <- lapply(1:20,function(x){
@@ -137,9 +145,8 @@ library(ggplot2)
 plot_pvalue <- ggplot(data.frame(second=tim,genes=dim),aes(x=genes,y=second))+
   geom_point()+
   ggtitle("p_value efficiency")
-####################
-# plot the grob
+#####################################
+# plot the grob of the scatterplots #
+#####################################
 library(gridExtra)
 grob2 <- grid.arrange(plot_normfinder,plot_genorm,plot_pvalue)
-
-grid.arrange(grob1,grob2,ncol=2)
