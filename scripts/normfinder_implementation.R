@@ -256,6 +256,9 @@ Normfinder=function(filename,Groups=TRUE,ctVal=TRUE,pStabLim=0.25){
 # devono essere prenormalizzatiidati di array????
 # df <- read.csv("testHK.csv")
 # df$Tumor.type<-as.character(df$Tumor.type)
+
+# run the function
 Normfinder("testHK.csv",ctVal = FALSE)
 # norm <- Normfinder("testHK.csv",ctVal = FALSE)
-# ord <- rownames(norm$Ordered)
+# rank of the genes
+ord <- rownames(norm$Ordered)
